@@ -241,7 +241,7 @@ Inline::Pdlpp - Write PDL Subroutines inline with PDL::PP
   use PDL;
   use Inline Pdlpp => 'DATA';
 
-  # make data with: echo -n 'ATCGZATCG' >input.data
+  # make sequence data with: echo -n 'ATCGATCG' >input.data
   # use it with aa_to_int.pl input.data
 
   my $file; ($file = shift, -f $file) || die "Usage: $0 filename";
@@ -261,13 +261,13 @@ Inline::Pdlpp - Write PDL Subroutines inline with PDL::PP
    Code => <<'EOF',
   switch($i()) {
    case 'A': $o() = 0; break;
-   case 'T': $o() = 1; break;
    case 'C': $o() = 2; break;
+   case 'T': $o() = 2; break;
+   case 'U': $o() = 2; break;  # RNA
    case 'G': $o() = 3; break;
-   default: $o() = 255; break;
-  }
+  } # we assume that the sequence is written in the A, C, T/U, G alphabet
   EOF
-   Doc => "=for ref\n\nConvert amino acid names to integers.\n",
+   Doc => "=for ref\n\nConvert DNA/RNA bases to integers.\n",
   );
 
 =head1 DESCRIPTION
